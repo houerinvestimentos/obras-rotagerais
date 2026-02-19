@@ -614,16 +614,27 @@
             }
         }
 
+        function atualizarStatusConexao() {
+            const ind = document.getElementById('offlineIndicator');
+            if (ind) {
+                if (!navigator.onLine) {
+                    ind.style.display = 'flex';
+                    ind.style.background = 'rgba(211, 84, 0, 0.95)';
+                    ind.innerText = '⚡ Modo Offline Ativo';
+                } else {
+                    ind.style.display = 'none';
+                }
+            }
+        }
+
+        window.addEventListener('online', atualizarStatusConexao);
+        window.addEventListener('offline', atualizarStatusConexao);
+
         fetchDados.then(data => {
             dadosCompletos = data.features;
             popularDropdowns(dadosCompletos);
             aplicarFiltros();
-
-            // Verifica se está servindo via cache (Modo Offline)
-            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-                document.getElementById('offlineIndicator').style.display = 'flex';
-            }
-
+            atualizarStatusConexao();
             document.getElementById('status').innerText = `${dadosCompletos.length} obras`;
         });
 
