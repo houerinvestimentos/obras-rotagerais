@@ -1,99 +1,288 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rota Gerais - Final</title>
-    
+
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
+
     <style>
         /* Desativa o delay de clique no mobile (Performance) */
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; overflow: hidden; background: #000; touch-action: manipulation; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; touch-action: manipulation; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+            touch-action: manipulation;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1;
+            touch-action: manipulation;
+        }
 
         /* --- SIDEBAR E MENUS --- */
-        .sidebar { 
-            position: absolute; left: 0; top: 0; width: 350px; height: 100vh; 
-            background: #f8f9fa; z-index: 1005; transition: transform 0.3s ease;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.3); display: flex; flex-direction: column;
+        .sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 350px;
+            height: 100vh;
+            background: #f8f9fa;
+            z-index: 1005;
+            transition: transform 0.3s ease;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
-        .sidebar.collapsed { transform: translateX(-350px); }
+
+        .sidebar.collapsed {
+            transform: translateX(-350px);
+        }
 
         .toggle-sidebar {
-            position: absolute; right: -55px; top: 50%; transform: translateY(-50%);
-            width: 55px; height: 110px; background: #2c3e50; color: white;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; border-radius: 0 15px 15px 0; font-size: 32px; z-index: 1006;
+            position: absolute;
+            right: -55px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 55px;
+            height: 110px;
+            background: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 0 15px 15px 0;
+            font-size: 32px;
+            z-index: 1006;
         }
 
-        .header { padding: 20px; background: #2c3e50; color: white; }
-        .filters { padding: 15px; background: #fff; border-bottom: 1px solid #ddd; }
-        .filters select, .filters input { width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 18px; box-sizing: border-box; }
-        .results-list { flex: 1; overflow-y: auto; padding: 12px; background: #f1f3f5; }
+        .header {
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .filters {
+            padding: 15px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .filters select,
+        .filters input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+
+        .results-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            background: #f1f3f5;
+        }
 
         /* --- RESTAURAÇÃO DO ESTILO DO CARTÃO (Baseado na imagem_025e1e.png) --- */
-        .obra-card { 
-            background: white; padding: 18px; margin-bottom: 12px; border-radius: 8px;
-            border-left: 6px solid #27ae60; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        /* Título da Obra (AMPLIACAO) */
-        .obra-card strong { 
-            display: block; font-size: 1.2em; color: #222; text-transform: uppercase; margin-bottom: 6px; 
-        }
-
-        /* Linha de Localização (TeofiloOtoni | BR-116) */
-        .obra-card .subtitle { 
-            font-size: 1em; color: #555; margin-bottom: 10px; display: flex; align-items: center; 
+        .obra-card {
+            background: white;
+            padding: 12px 14px;
+            /* Mais compacto no PC */
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 5px solid #27ae60;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease;
         }
 
-        /* Trecho (Fundamental) */
+        .obra-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Título da Obra (Agora Tipo de Obra) */
+        .obra-card strong {
+            display: block;
+            font-size: 1.05em;
+            color: #2c3e50;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Linha de Localização */
+        .obra-card .subtitle {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Trecho */
         .obra-card .trecho-info {
-            font-size: 0.9em; color: #444; background-color: #f1f1f1; 
-            padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px;
+            font-size: 0.85em;
+            color: #777;
+            display: block;
+            margin-bottom: 8px;
         }
 
-        /* Rodapé Flex: Etiqueta Laranja esq, Preço Verde dir (Igual image_02bbc0.png) */
-        .obra-card .footer { 
-            display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid #eee; padding-top: 8px; 
+        /* Rodapé Flex */
+        .obra-card .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 6px;
         }
-        
-        .obra-tag { color: #e67e22; font-weight: bold; font-size: 0.95em; } /* Laranja */
-        .valor-destaque { color: #27ae60; font-weight: bold; font-size: 1.1em; } /* Verde */
+
+        .obra-tag {
+            color: #e67e22;
+            font-weight: 600;
+            font-size: 0.85em;
+            text-transform: uppercase;
+        }
+
+        .valor-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .valor-label {
+            font-size: 0.75em;
+            color: #888;
+            font-weight: normal;
+        }
 
         /* --- ESTILO DO POPUP (Baseado na imagem_0333f7.png e image_026107.png) --- */
-        .custom-popup { font-family: 'Segoe UI', sans-serif; min-width: 260px; }
-        .popup-header { color: #e67e22; font-weight: bold; margin-bottom: 2px; }
-        .popup-title { font-size: 1.1em; font-weight: bold; margin-bottom: 4px; display: block; }
-        .popup-loc { font-size: 0.9em; color: #555; margin-bottom: 8px; }
-        .popup-data-row { font-size: 0.9em; margin-bottom: 4px; }
-        .popup-price { color: #27ae60; font-weight: bold; font-size: 1.2em; margin-top: 6px; display: block; }
+        .custom-popup {
+            font-family: 'Segoe UI', sans-serif;
+            min-width: 260px;
+        }
+
+        .popup-header {
+            color: #e67e22;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .popup-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .popup-loc {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .popup-data-row {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+
+        .popup-price {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 6px;
+            display: block;
+        }
 
         /* Botão GPS */
         .gps-button {
-            position: absolute; top: 20px; right: 20px; z-index: 1010;
-            background: white; border: 2px solid rgba(0,0,0,0.2);
-            width: 65px; height: 65px; border-radius: 12px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; font-size: 32px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1010;
+            background: white;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            width: 65px;
+            height: 65px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         /* Ajustes Desktop */
         @media (min-width: 769px) {
-            .gps-button { width: 45px; height: 45px; font-size: 22px; border-radius: 8px; }
-            .toggle-sidebar { width: 35px; height: 70px; right: -35px; font-size: 20px; border-radius: 0 8px 8px 0; }
-            .obra-card { padding: 15px; }
-            .filters select, .filters input { padding: 10px; font-size: 14px; margin-bottom: 8px; }
+            .gps-button {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+                border-radius: 8px;
+            }
+
+            .toggle-sidebar {
+                width: 35px;
+                height: 70px;
+                right: -35px;
+                font-size: 20px;
+                border-radius: 0 8px 8px 0;
+            }
+
+            .obra-card {
+                padding: 12px 14px;
+            }
+
+            .filters select,
+            .filters input {
+                padding: 10px;
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
         }
+
         @media (max-width: 768px) {
-            .sidebar { width: 320px; }
-            .sidebar.collapsed { transform: translateX(-320px); }
+            .sidebar {
+                width: 320px;
+            }
+
+            .sidebar.collapsed {
+                transform: translateX(-320px);
+            }
+
+            .obra-card {
+                padding: 18px;
+                /* Maior no mobile como solicitado */
+            }
+
+            .obra-card strong {
+                font-size: 1.2em;
+            }
+
+            .valor-container {
+                font-size: 1.15em;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="sidebar" id="sidebar">
@@ -103,9 +292,15 @@
             <div id="status" style="font-size: 0.9em; opacity: 0.8;">Carregando...</div>
         </div>
         <div class="filters">
-            <select id="filtroMunicipio" onchange="aplicarFiltros()"><option value="todos">Todos Municípios</option></select>
-            <select id="filtroTipo" onchange="aplicarFiltros()"><option value="todos">Todos Tipos</option></select>
-            <input type="text" id="buscaTexto" placeholder="ID ou Nome..." oninput="aplicarFiltros()">
+            <select id="filtroMunicipio" onchange="aplicarFiltros()">
+                <option value="todos">Todos Municípios</option>
+            </select>
+            <select id="filtroObra" onchange="aplicarFiltros()">
+                <option value="todos">Todas Obras</option>
+            </select>
+            <select id="filtroTipo" onchange="aplicarFiltros()">
+                <option value="todos">Tipos de Obras</option>
+            </select>
         </div>
         <div class="results-list" id="listaObras"></div>
     </div>
@@ -120,13 +315,16 @@
         let dadosCompletos = [];
         const fetchDados = fetch('Obras_Validadas.json').then(r => r.json());
 
-        // 2. Motor de Renderização Canvas (Tolerância alta para clique fácil)
-        const meuRenderer = L.canvas({ padding: 0.5, tolerance: 20 });
+        // Identifica se é dispositivo móvel para ajustar usabilidade
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
-        const map = L.map('map', { 
+        // 2. Motor de Renderização Canvas (Tolerância aumentada para clique fácil, especialmente no mobile)
+        const meuRenderer = L.canvas({ padding: 0.5, tolerance: isMobile ? 30 : 15 });
+
+        const map = L.map('map', {
             renderer: meuRenderer,
             zoomSnap: 0.5,
-            tap: false 
+            tap: false
         }).setView([-18.5, -44.5], 7);
 
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -160,24 +358,30 @@
         });
 
         function popularDropdowns(features) {
-            const munSet = new Set(), tipoSet = new Set();
-            features.forEach(f => { munSet.add(f.properties.municipio); tipoSet.add(f.properties.tipo_obra); });
+            const munSet = new Set(), obraSet = new Set(), tipoSet = new Set();
+            features.forEach(f => {
+                munSet.add(f.properties.municipio);
+                obraSet.add(f.properties.obra);
+                tipoSet.add(f.properties.tipo_obra);
+            });
             const fill = (id, set) => {
                 const el = document.getElementById(id);
                 [...set].sort().forEach(v => { let opt = document.createElement('option'); opt.value = opt.text = v; el.add(opt); });
             };
-            fill('filtroMunicipio', munSet); fill('filtroTipo', tipoSet);
+            fill('filtroMunicipio', munSet);
+            fill('filtroObra', obraSet);
+            fill('filtroTipo', tipoSet);
         }
 
         function aplicarFiltros() {
             const mun = document.getElementById('filtroMunicipio').value;
+            const obra = document.getElementById('filtroObra').value;
             const tipo = document.getElementById('filtroTipo').value;
-            const busca = document.getElementById('buscaTexto').value.toLowerCase();
             const filtrados = dadosCompletos.filter(f => {
                 const p = f.properties;
-                return (mun === "todos" || p.municipio === mun) && 
-                       (tipo === "todos" || p.tipo_obra === tipo) &&
-                       (p.obra.toLowerCase().includes(busca) || String(p.id).includes(busca));
+                return (mun === "todos" || p.municipio === mun) &&
+                    (obra === "todos" || p.obra === obra) &&
+                    (tipo === "todos" || p.tipo_obra === tipo);
             });
             renderMapa(filtrados);
             renderLista(filtrados);
@@ -185,12 +389,16 @@
 
         function renderMapa(features) {
             if (geojsonLayer) map.removeLayer(geojsonLayer);
-            geojsonLayer = L.geoJSON({type: "FeatureCollection", features: features}, {
-                style: { color: "#00FF00", weight: 14, opacity: 0.9 }, // Linha Grossa para fácil clique
+            geojsonLayer = L.geoJSON({ type: "FeatureCollection", features: features }, {
+                style: {
+                    color: "#00FF00",
+                    weight: isMobile ? 14 : 4, // Linha fina no PC, grossa no Mobile
+                    opacity: 0.9
+                },
                 onEachFeature: (f, l) => {
                     const p = f.properties;
-                    // POPUP RESTAURADO: Igual à imagem image_0333f7.png e image_026107.png
-                    l.bindPopup(`
+                    // Pré-gera o conteúdo do popup para abertura instantânea
+                    const popupContent = `
                         <div class="custom-popup">
                             <div class="popup-header">${p.tipo_obra}</div>
                             <span class="popup-title">${p.obra}</span>
@@ -203,7 +411,12 @@
                             
                             <span class="popup-price">${p.valor_obra}</span>
                         </div>
-                    `);
+                    `;
+                    l.bindPopup(popupContent, {
+                        closeButton: false,
+                        autoPanPadding: [50, 50],
+                        className: 'fast-popup'
+                    });
                 }
             }).addTo(map);
         }
@@ -215,21 +428,26 @@
                 const p = f.properties;
                 const card = document.createElement('div');
                 card.className = 'obra-card';
-                
-                // CARTÃO LATERAL RESTAURADO: Igual à imagem image_025e1e.png e image_02bbc0.png
+
+                const valorSemCentavos = p.valor_obra.split(',')[0];
+
+                // CARTÃO LATERAL: Minimalista e Elegante
                 card.innerHTML = `
-                    <strong>${p.obra}</strong>
+                    <strong>${p.tipo_obra}</strong>
                     <div class="subtitle">📍 ${p.municipio} | ${p.rodovia}</div>
-                    <div class="trecho-info">KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}</div>
+                    <div class="trecho-info">Trecho: KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}</div>
                     
                     <div class="footer">
-                        <span class="obra-tag">${p.tipo_obra}</span>
-                        <span class="valor-destaque">${p.valor_obra}</span>
+                        <span class="obra-tag">${p.obra}</span>
+                        <div class="valor-container">
+                            <span class="valor-label">Valor EVETEA:</span>
+                            <span>${valorSemCentavos}</span>
+                        </div>
                     </div>
                 `;
                 card.onclick = () => {
                     const layer = geojsonLayer.getLayers().find(l => l.feature.properties.id === p.id);
-                    if(layer) { map.fitBounds(layer.getBounds()); layer.openPopup(); }
+                    if (layer) { map.fitBounds(layer.getBounds()); layer.openPopup(); }
                 };
                 lista.appendChild(card);
             });
@@ -238,4 +456,5 @@
         if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./sw.js'); }
     </script>
 </body>
+
 </html>
