@@ -521,7 +521,8 @@
 
         let geojsonLayer, userMarker;
 
-        // Mapeamento de Símbolos por Tipo de Obra
+        // Mapeamento de Símbolos por Tipo de Obra (DESATIVADO - COMENTADO PARA REFERENCIA)
+        /*
         const mappingIcones = {
             "PONTE": "🌉",
             "OAE PONTE": "🌉",
@@ -538,48 +539,50 @@
             "CONTORNO TREVO": "🍀",
             "GOTA": "💧"
         };
+        */
 
-        // Função para criar o ícone personalizado dinamicamente (Easter Egg)
+        // Função para criar o ícone padrão com escalonamento dinâmico
         function getCustomIcon(tipo, nome, color, zoom) {
+            /* 
+            // LOGICA DE ICONES PERSONALIZADOS (DESATIVADA CONFORME SOLICITADO):
             const T = tipo.toUpperCase();
             const N = nome.toUpperCase();
+            if (zoom >= 13) {
+                let simbolo = "📍";
+                if (T.includes("GOTA")) simbolo = "💧";
+                else if (T.includes("DIAMANTE")) simbolo = "💎";
+                else if (T.includes("TREVO")) simbolo = "🍀";
+                else if (T.includes("ROTATORIA") || T.includes("ROTATÓRIA")) simbolo = "🔄";
+                else if (T.includes("PASSARELA")) simbolo = "🚶";
+                else if (T.includes("PONTE") || T.includes("VIADUTO")) simbolo = "🌉";
+                else if (mappingIcones[T]) simbolo = mappingIcones[T];
+                else if (N.includes("OAE")) simbolo = "🌉";
 
-            // MODO DISTANTE: Pino Padrão (Easter Egg - Zoom < 14)
-            if (zoom < 13) {
-                let pSize = zoom < 8 ? [12, 20] : (zoom < 11 ? [18, 30] : [25, 41]);
-                let pAnchor = [pSize[0] / 2, pSize[1]];
-                return new L.Icon({
-                    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-                    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-                    iconSize: pSize,
-                    iconAnchor: pAnchor,
-                    popupAnchor: [1, -pSize[1] + 5],
-                    shadowSize: [pSize[0], pSize[0]]
+                let size = zoom < 16 ? 36 : 48;
+                let fontSize = zoom < 16 ? 28 : 38;
+                const isText = simbolo.length === 1 && !simbolo.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/);
+                const style = isText ? `color: ${color};` : "";
+
+                return L.divIcon({
+                    className: 'custom-div-icon',
+                    html: `<div class="icon-symbol" style="${style} font-size: ${fontSize}px;">${simbolo}</div>`,
+                    iconSize: [size, size],
+                    iconAnchor: [size / 2, size / 2]
                 });
             }
+            */
 
-            // MODO PRÓXIMO: Símbolos Especiais (Zoom >= 14)
-            let simbolo = "📍";
-            if (T.includes("GOTA")) simbolo = "💧";
-            else if (T.includes("DIAMANTE")) simbolo = "💎";
-            else if (T.includes("TREVO")) simbolo = "🍀";
-            else if (T.includes("ROTATORIA") || T.includes("ROTATÓRIA")) simbolo = "🔄";
-            else if (T.includes("PASSARELA")) simbolo = "🚶";
-            else if (T.includes("PONTE") || T.includes("VIADUTO")) simbolo = "🌉";
-            else if (mappingIcones[T]) simbolo = mappingIcones[T];
-            else if (N.includes("OAE")) simbolo = "🌉";
+            // Escalonamento Dinâmico por Zoom para o Pino Padrão (ATIVO)
+            let pSize = zoom < 8 ? [12, 20] : (zoom < 11 ? [18, 30] : (zoom < 14 ? [25, 41] : [34, 56]));
+            let pAnchor = [pSize[0] / 2, pSize[1]];
 
-            let size = zoom < 16 ? 36 : 48;
-            let fontSize = zoom < 16 ? 28 : 38;
-
-            const isText = simbolo.length === 1 && !simbolo.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/);
-            const style = isText ? `color: ${color};` : "";
-
-            return L.divIcon({
-                className: 'custom-div-icon',
-                html: `<div class="icon-symbol" style="${style} font-size: ${fontSize}px;">${simbolo}</div>`,
-                iconSize: [size, size],
-                iconAnchor: [size / 2, size / 2]
+            return new L.Icon({
+                iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+                iconSize: pSize,
+                iconAnchor: pAnchor,
+                popupAnchor: [1, -pSize[1] + 5],
+                shadowSize: [pSize[0], pSize[0]]
             });
         }
 
