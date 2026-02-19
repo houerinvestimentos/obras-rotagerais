@@ -89,8 +89,9 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            /* Alinha o início do status com o início do título */
             gap: 1px;
+            width: max-content;
+            /* Garante que o container tenha a largura do título */
         }
 
         .header-title {
@@ -99,18 +100,44 @@
             color: white;
             line-height: 1.2;
             text-align: left;
+            width: 100%;
         }
 
         .header-status {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            /* Centraliza pin + texto */
-            gap: 4px;
+            justify-content: space-between;
+            width: 100%;
+            gap: 12px;
             font-size: 0.9em;
-            /* Ajustado para um tamanho mais equilibrado */
             opacity: 0.95;
-            margin-top: -1px;
+            margin-top: 2px;
+        }
+
+        .btn-painel {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 6px 10.8px;
+            /* Aumentado */
+            border-radius: 4px;
+            font-size: 13px;
+            /* Aumentado */
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.2s;
+        }
+
+        .btn-painel:hover {
+            background: #2ecc71;
+        }
+
+        .status-info {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .filters {
@@ -219,13 +246,19 @@
         }
 
         .popup-header {
-            color: #e67e22;
+            color: #555;
+            /* Cor mais neutra para o Lote/Obra */
+            font-size: 0.9em;
             font-weight: bold;
             margin-bottom: 2px;
+            text-transform: uppercase;
         }
 
         .popup-title {
-            font-size: 1.1em;
+            font-size: 1.2em;
+            /* Aumentado em 1 (de 1.1 para 1.2) */
+            color: #e67e22;
+            /* Destaque laranja para o Tipo de Obra */
             font-weight: bold;
             margin-bottom: 4px;
             display: block;
@@ -320,6 +353,23 @@
                 font-size: 1.15em;
             }
         }
+
+        /* Estilo para o Ícone de Simples (Sem Fundo) */
+        .custom-div-icon {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-symbol {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
     </style>
 </head>
 
@@ -332,8 +382,11 @@
             <div class="header-content">
                 <div class="header-title">Obras - Rota Gerais</div>
                 <div class="header-status">
-                    <span>📍</span>
-                    <span id="status">Carregando...</span>
+                    <div class="status-info">
+                        <span>📍</span>
+                        <span id="status">Carregando...</span>
+                    </div>
+                    <button class="btn-painel" onclick="toggleMenu()">PAINEL</button>
                 </div>
             </div>
         </div>
@@ -367,6 +420,26 @@
         // 2. Motor de Renderização Canvas (Tolerância aumentada para clique fácil, especialmente no mobile)
         const meuRenderer = L.canvas({ padding: 0.5, tolerance: isMobile ? 30 : 15 });
 
+        // Gerador de Cores Vibrantes (Evita tons escuros para melhor contraste no mapa de satélite)
+        const cacheCores = {};
+        const paletaCores = [
+            "#39FF14", "#FFFF00", "#FF00FF", "#00FFFF", "#FF4500",
+            "#FF1493", "#00FF00", "#FF0000", "#00BFFF", "#FFD700",
+            "#FF8C00", "#ADFF2F", "#00FA9A", "#FF69B4", "#DA70D6"
+        ];
+
+        function getColor(obra) {
+            if (!obra) return "#00FF00";
+            if (cacheCores[obra]) return cacheCores[obra];
+
+            // Atribui uma cor da paleta baseada no nome (determinístico)
+            let hash = 0;
+            for (let i = 0; i < obra.length; i++) hash = obra.charCodeAt(i) + ((hash << 5) - hash);
+            const index = Math.abs(hash) % paletaCores.length;
+            cacheCores[obra] = paletaCores[index];
+            return cacheCores[obra];
+        }
+
         const map = L.map('map', {
             renderer: meuRenderer,
             zoomSnap: 0.5,
@@ -374,11 +447,87 @@
         }).setView([-18.5, -44.5], 7);
 
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Esri', maxNativeZoom: 18, maxZoom: 22
+            attribution: 'Esri', maxNativeZoom: 17, maxZoom: 18
         }).addTo(map);
 
         let geojsonLayer, userMarker;
+
+        // Mapeamento de Símbolos por Tipo de Obra
+        const mappingIcones = {
+            "PONTE": "🌉",
+            "OAE PONTE": "🌉",
+            "VIADUTO": "🌉",
+            "PASSARELA": "🚶",
+            "RETORNO U": "U",
+            "RETORNO EM U": "U",
+            "RETORNO EM X": "✖️",
+            "RETORNO X": "✖️",
+            "DIAMANTE": "💎",
+            "CONTORNO DIAMANTE": "💎",
+            "ROTATÓRIA": "🔄",
+            "TREVO": "🍀",
+            "CONTORNO TREVO": "🍀",
+            "GOTA": "💧"
+        };
+
+        // Função para criar o ícone personalizado dinamicamente (Easter Egg)
+        function getCustomIcon(tipo, nome, color, zoom) {
+            const T = tipo.toUpperCase();
+            const N = nome.toUpperCase();
+
+            // MODO DISTANTE: Pino Padrão (Easter Egg - Zoom < 14)
+            if (zoom < 13) {
+                let pSize = zoom < 8 ? [12, 20] : (zoom < 11 ? [18, 30] : [25, 41]);
+                let pAnchor = [pSize[0] / 2, pSize[1]];
+                return new L.Icon({
+                    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+                    iconSize: pSize,
+                    iconAnchor: pAnchor,
+                    popupAnchor: [1, -pSize[1] + 5],
+                    shadowSize: [pSize[0], pSize[0]]
+                });
+            }
+
+            // MODO PRÓXIMO: Símbolos Especiais (Zoom >= 14)
+            let simbolo = "📍";
+            if (T.includes("GOTA")) simbolo = "💧";
+            else if (T.includes("DIAMANTE")) simbolo = "💎";
+            else if (T.includes("TREVO")) simbolo = "🍀";
+            else if (T.includes("ROTATORIA") || T.includes("ROTATÓRIA")) simbolo = "🔄";
+            else if (T.includes("PASSARELA")) simbolo = "🚶";
+            else if (T.includes("PONTE") || T.includes("VIADUTO")) simbolo = "🌉";
+            else if (mappingIcones[T]) simbolo = mappingIcones[T];
+            else if (N.includes("OAE")) simbolo = "🌉";
+
+            let size = zoom < 16 ? 36 : 48;
+            let fontSize = zoom < 16 ? 28 : 38;
+
+            const isText = simbolo.length === 1 && !simbolo.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/);
+            const style = isText ? `color: ${color};` : "";
+
+            return L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div class="icon-symbol" style="${style} font-size: ${fontSize}px;">${simbolo}</div>`,
+                iconSize: [size, size],
+                iconAnchor: [size / 2, size / 2]
+            });
+        }
+
         userMarker = L.circleMarker([0, 0], { radius: 10, fillColor: "#3498db", color: "#fff", weight: 3, fillOpacity: 1 }).addTo(map);
+
+        // Atualiza o tamanho dos ícones ao mudar o zoom
+        map.on('zoomend', () => {
+            const z = map.getZoom();
+            if (geojsonLayer) {
+                geojsonLayer.eachLayer(l => {
+                    if (l instanceof L.Marker && l.feature && l.feature.properties) {
+                        const p = l.feature.properties;
+                        l.setIcon(getCustomIcon(p.tipo_obra, p.obra, getColor(p.obra), z));
+                    }
+                });
+            }
+        });
 
         function toggleMenu() {
             const s = document.getElementById('sidebar');
@@ -435,19 +584,26 @@
 
         function renderMapa(features) {
             if (geojsonLayer) map.removeLayer(geojsonLayer);
+
             geojsonLayer = L.geoJSON({ type: "FeatureCollection", features: features }, {
-                style: {
-                    color: "#00FF00",
-                    weight: isMobile ? 14 : 2.5, // Linha fina no PC, grossa no Mobile
-                    opacity: 0.9
+                style: (f) => {
+                    return {
+                        color: getColor(f.properties.obra),
+                        weight: isMobile ? 18.2 : 3.25,
+                        opacity: 0.9
+                    };
+                },
+                pointToLayer: (f, latlng) => {
+                    const p = f.properties;
+                    return L.marker(latlng, { icon: getCustomIcon(p.tipo_obra, p.obra, getColor(p.obra), map.getZoom()) });
                 },
                 onEachFeature: (f, l) => {
                     const p = f.properties;
                     // Pré-gera o conteúdo do popup para abertura instantânea
                     const popupContent = `
                         <div class="custom-popup">
-                            <div class="popup-header">${p.tipo_obra}</div>
-                            <span class="popup-title">${p.obra}</span>
+                            <div class="popup-header">${p.obra}</div>
+                            <span class="popup-title">${p.tipo_obra}</span>
                             <div class="popup-loc">📍 ${p.municipio} | ${p.rodovia}</div>
                             <hr style="border:0; border-top:1px solid #eee; margin:5px 0;">
                             
@@ -455,7 +611,7 @@
                             <div class="popup-data-row"><b>Rodovia:</b> ${p.rodovia} &nbsp; | &nbsp; <b>Ano:</b> ${p.ano_obra}</div>
                             <div class="popup-data-row"><b>Trecho:</b> KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)} &nbsp; | &nbsp; <b>Extensão:</b> ${p.extensao} KM</div>
                             
-                            <span class="popup-price">${p.valor_obra}</span>
+                            <div class="popup-data-row"><b>Valor EVETEA:</b> <span class="popup-price" style="display:inline; margin:0; font-size:1.15em;">${p.valor_obra}</span></div>
                         </div>
                     `;
                     l.bindPopup(popupContent, {
@@ -474,26 +630,36 @@
                 const p = f.properties;
                 const card = document.createElement('div');
                 card.className = 'obra-card';
+                card.style.borderLeftColor = getColor(p.obra); // Aplica a mesma cor do mapa
 
-                const valorSemCentavos = p.valor_obra.split(',')[0];
+                const munDisplay = (p.municipio && p.municipio.toLowerCase() !== "nan") ? p.municipio : "Região";
+                const valorSemCentavos = p.valor_obra ? p.valor_obra.split(',')[0] : "R$ 0";
 
                 // CARTÃO LATERAL: Minimalista e Elegante
                 card.innerHTML = `
                     <strong>${p.tipo_obra}</strong>
-                    <div class="subtitle">📍 ${p.municipio} | ${p.rodovia}</div>
-                    <div class="trecho-info">Trecho: KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)} | Extensão: ${p.extensao} KM</div>
+                    <div class="subtitle">📍 ${munDisplay} | ${p.rodovia}</div>
+                    <div class="trecho-info" style="margin-bottom:4px; color:#555;"><b>Descrição:</b> ${p.descricao}</div>
+                    <div class="trecho-info"><b>Trecho:</b> KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)} | <b>Extensão:</b> ${p.extensao} KM</div>
                     
                     <div class="footer">
                         <span class="obra-tag">${p.obra}</span>
                         <div class="valor-container">
-                            <span class="valor-label">Valor EVETEA:</span>
+                            <span class="valor-label" style="font-weight:bold; color:#555; font-size: 0.8em;">Valor EVETEA:</span>
                             <span>${valorSemCentavos}</span>
                         </div>
                     </div>
                 `;
                 card.onclick = () => {
                     const layer = geojsonLayer.getLayers().find(l => l.feature.properties.id === p.id);
-                    if (layer) { map.fitBounds(layer.getBounds()); layer.openPopup(); }
+                    if (layer) {
+                        if (layer.getBounds) {
+                            map.fitBounds(layer.getBounds());
+                        } else if (layer.getLatLng) {
+                            map.setView(layer.getLatLng(), 17); // Zoom aproximado para pontos
+                        }
+                        layer.openPopup();
+                    }
                 };
                 lista.appendChild(card);
             });
