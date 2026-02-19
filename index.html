@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Rota Gerais - Prioridade Total</title>
+    <title>Rota Gerais - Final</title>
     
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; overflow: hidden; background: #000; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
+        /* Desativa o delay de clique no mobile (Performance) */
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; overflow: hidden; background: #000; touch-action: manipulation; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; touch-action: manipulation; }
 
+        /* --- SIDEBAR E MENUS --- */
         .sidebar { 
             position: absolute; left: 0; top: 0; width: 350px; height: 100vh; 
             background: #f8f9fa; z-index: 1005; transition: transform 0.3s ease;
@@ -23,24 +25,54 @@
             position: absolute; right: -55px; top: 50%; transform: translateY(-50%);
             width: 55px; height: 110px; background: #2c3e50; color: white;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; border-radius: 0 15px 15px 0; font-size: 32px;
-            z-index: 1006;
+            cursor: pointer; border-radius: 0 15px 15px 0; font-size: 32px; z-index: 1006;
         }
 
         .header { padding: 20px; background: #2c3e50; color: white; }
         .filters { padding: 15px; background: #fff; border-bottom: 1px solid #ddd; }
         .filters select, .filters input { width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 18px; box-sizing: border-box; }
-        
         .results-list { flex: 1; overflow-y: auto; padding: 12px; background: #f1f3f5; }
 
+        /* --- RESTAURAÇÃO DO ESTILO DO CARTÃO (Baseado na imagem_025e1e.png) --- */
         .obra-card { 
-            background: white; padding: 20px; margin-bottom: 15px; border-radius: 10px;
-            border-left: 8px solid #27ae60; cursor: pointer;
+            background: white; padding: 18px; margin-bottom: 12px; border-radius: 8px;
+            border-left: 6px solid #27ae60; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .obra-card strong { display: block; font-size: 1.35em; color: #222; }
-        .obra-card .trecho { font-size: 1em; color: #666; margin: 8px 0; }
-        .obra-tag { color: #e67e22; font-weight: bold; font-size: 1.05em; }
+        
+        /* Título da Obra (AMPLIACAO) */
+        .obra-card strong { 
+            display: block; font-size: 1.2em; color: #222; text-transform: uppercase; margin-bottom: 6px; 
+        }
 
+        /* Linha de Localização (TeofiloOtoni | BR-116) */
+        .obra-card .subtitle { 
+            font-size: 1em; color: #555; margin-bottom: 10px; display: flex; align-items: center; 
+        }
+
+        /* Trecho (Fundamental) */
+        .obra-card .trecho-info {
+            font-size: 0.9em; color: #444; background-color: #f1f1f1; 
+            padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px;
+        }
+
+        /* Rodapé Flex: Etiqueta Laranja esq, Preço Verde dir (Igual image_02bbc0.png) */
+        .obra-card .footer { 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-top: 1px solid #eee; padding-top: 8px; 
+        }
+        
+        .obra-tag { color: #e67e22; font-weight: bold; font-size: 0.95em; } /* Laranja */
+        .valor-destaque { color: #27ae60; font-weight: bold; font-size: 1.1em; } /* Verde */
+
+        /* --- ESTILO DO POPUP (Baseado na imagem_0333f7.png e image_026107.png) --- */
+        .custom-popup { font-family: 'Segoe UI', sans-serif; min-width: 260px; }
+        .popup-header { color: #e67e22; font-weight: bold; margin-bottom: 2px; }
+        .popup-title { font-size: 1.1em; font-weight: bold; margin-bottom: 4px; display: block; }
+        .popup-loc { font-size: 0.9em; color: #555; margin-bottom: 8px; }
+        .popup-data-row { font-size: 0.9em; margin-bottom: 4px; }
+        .popup-price { color: #27ae60; font-weight: bold; font-size: 1.2em; margin-top: 6px; display: block; }
+
+        /* Botão GPS */
         .gps-button {
             position: absolute; top: 20px; right: 20px; z-index: 1010;
             background: white; border: 2px solid rgba(0,0,0,0.2);
@@ -49,19 +81,17 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
+        /* Ajustes Desktop */
         @media (min-width: 769px) {
-            .gps-button { width: 45px; height: 45px; font-size: 22px; }
-            .toggle-sidebar { width: 35px; height: 70px; right: -35px; font-size: 20px; }
+            .gps-button { width: 45px; height: 45px; font-size: 22px; border-radius: 8px; }
+            .toggle-sidebar { width: 35px; height: 70px; right: -35px; font-size: 20px; border-radius: 0 8px 8px 0; }
             .obra-card { padding: 15px; }
-            .obra-card strong { font-size: 1.1em; }
+            .filters select, .filters input { padding: 10px; font-size: 14px; margin-bottom: 8px; }
         }
-
         @media (max-width: 768px) {
             .sidebar { width: 320px; }
             .sidebar.collapsed { transform: translateX(-320px); }
         }
-
-        .valor-destaque { color: #27ae60; font-weight: bold; font-size: 1.2em; }
     </style>
 </head>
 <body>
@@ -70,12 +100,12 @@
         <div class="toggle-sidebar" onclick="toggleMenu()" id="toggleIcon">◀</div>
         <div class="header">
             <h3 style="margin:0; font-size: 1.3em;">📍 Rota Gerais</h3>
-            <div id="status" style="font-size: 0.9em; opacity: 0.8;">Carregando obras prioritárias...</div>
+            <div id="status" style="font-size: 0.9em; opacity: 0.8;">Carregando...</div>
         </div>
         <div class="filters">
-            <select id="filtroMunicipio" onchange="aplicarFiltros()"><option value="todos">Todos os Municípios</option></select>
-            <select id="filtroTipo" onchange="aplicarFiltros()"><option value="todos">Todos os Tipos</option></select>
-            <input type="text" id="buscaTexto" placeholder="Buscar por Nome ou ID..." oninput="aplicarFiltros()">
+            <select id="filtroMunicipio" onchange="aplicarFiltros()"><option value="todos">Todos Municípios</option></select>
+            <select id="filtroTipo" onchange="aplicarFiltros()"><option value="todos">Todos Tipos</option></select>
+            <input type="text" id="buscaTexto" placeholder="ID ou Nome..." oninput="aplicarFiltros()">
         </div>
         <div class="results-list" id="listaObras"></div>
     </div>
@@ -86,25 +116,31 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        // 1. Inicia o carregamento dos dados IMEDIATAMENTE (Prioridade Máxima)
+        // 1. Carregamento imediato dos dados (Independente do mapa)
         let dadosCompletos = [];
-        const promessaDados = fetch('Obras_Validadas.json').then(r => r.json());
+        const fetchDados = fetch('Obras_Validadas.json').then(r => r.json());
+
+        // 2. Motor de Renderização Canvas (Tolerância alta para clique fácil)
+        const meuRenderer = L.canvas({ padding: 0.5, tolerance: 20 });
+
+        const map = L.map('map', { 
+            renderer: meuRenderer,
+            zoomSnap: 0.5,
+            tap: false 
+        }).setView([-18.5, -44.5], 7);
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Esri', maxNativeZoom: 18, maxZoom: 22
+        }).addTo(map);
+
+        let geojsonLayer, userMarker;
+        userMarker = L.circleMarker([0, 0], { radius: 10, fillColor: "#3498db", color: "#fff", weight: 3, fillOpacity: 1 }).addTo(map);
 
         function toggleMenu() {
             const s = document.getElementById('sidebar');
             s.classList.toggle('collapsed');
             document.getElementById('toggleIcon').innerText = s.classList.contains('collapsed') ? "▶" : "◀";
         }
-
-        const map = L.map('map', { zoomSnap: 0.5 }).setView([-18.5, -44.5], 7);
-
-        // 2. Só carrega o satélite APÓS inicializar o mapa base
-        const satLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Esri', maxNativeZoom: 18, maxZoom: 22
-        }).addTo(map);
-
-        let geojsonLayer, userMarker;
-        userMarker = L.circleMarker([0, 0], { radius: 10, fillColor: "#3498db", color: "#fff", weight: 3, fillOpacity: 1 }).addTo(map);
 
         function centralizarNoGPS() {
             if ("geolocation" in navigator) {
@@ -116,14 +152,11 @@
             }
         }
 
-        // 3. Processa os dados assim que chegarem, independente do mapa de fundo
-        promessaDados.then(data => {
+        fetchDados.then(data => {
             dadosCompletos = data.features;
             popularDropdowns(dadosCompletos);
             aplicarFiltros();
-            document.getElementById('status').innerText = `${dadosCompletos.length} obras carregadas`;
-        }).catch(() => {
-            document.getElementById('status').innerText = "Modo Offline Ativado";
+            document.getElementById('status').innerText = `${dadosCompletos.length} obras`;
         });
 
         function popularDropdowns(features) {
@@ -153,19 +186,22 @@
         function renderMapa(features) {
             if (geojsonLayer) map.removeLayer(geojsonLayer);
             geojsonLayer = L.geoJSON({type: "FeatureCollection", features: features}, {
-                // Aumentando drasticamente o peso de interação para facilitar o clique
-                style: { color: "#00FF00", weight: 14, opacity: 0.9 }, 
+                style: { color: "#00FF00", weight: 14, opacity: 0.9 }, // Linha Grossa para fácil clique
                 onEachFeature: (f, l) => {
                     const p = f.properties;
+                    // POPUP RESTAURADO: Igual à imagem image_0333f7.png e image_026107.png
                     l.bindPopup(`
-                        <div style="min-width:250px;">
-                            <span style="color:#e67e22; font-weight:bold; font-size:0.9em;">${p.tipo_obra}</span><br>
-                            <strong>Obra: ${p.obra}</strong><br><small>📍 ${p.municipio}</small><hr>
-                            <div style="font-size:0.95em">
-                                <b>Descrição:</b> ${p.descricao}<br>
-                                <b>Trecho:</b> KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}<br>
-                                <span style="color:#27ae60; font-weight:bold; font-size:1.1em;">${p.valor_obra}</span>
-                            </div>
+                        <div class="custom-popup">
+                            <div class="popup-header">${p.tipo_obra}</div>
+                            <span class="popup-title">${p.obra}</span>
+                            <div class="popup-loc">📍 ${p.municipio} | ${p.rodovia}</div>
+                            <hr style="border:0; border-top:1px solid #eee; margin:5px 0;">
+                            
+                            <div class="popup-data-row"><b>Descrição:</b> ${p.descricao}</div>
+                            <div class="popup-data-row"><b>Rodovia:</b> ${p.rodovia} &nbsp; | &nbsp; <b>Ano:</b> ${p.ano_obra}</div>
+                            <div class="popup-data-row"><b>Trecho:</b> KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}</div>
+                            
+                            <span class="popup-price">${p.valor_obra}</span>
                         </div>
                     `);
                 }
@@ -179,11 +215,14 @@
                 const p = f.properties;
                 const card = document.createElement('div');
                 card.className = 'obra-card';
+                
+                // CARTÃO LATERAL RESTAURADO: Igual à imagem image_025e1e.png e image_02bbc0.png
                 card.innerHTML = `
                     <strong>${p.obra}</strong>
                     <div class="subtitle">📍 ${p.municipio} | ${p.rodovia}</div>
-                    <div class="trecho">Trecho: KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}</div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div class="trecho-info">KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}</div>
+                    
+                    <div class="footer">
                         <span class="obra-tag">${p.tipo_obra}</span>
                         <span class="valor-destaque">${p.valor_obra}</span>
                     </div>
