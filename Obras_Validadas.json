@@ -13,7 +13,8 @@
         "km_inicial": 0.0,
         "km_final": 1.4,
         "ano_obra": "10",
-        "valor_obra": "R$ 3.885.347,67"
+        "valor_obra": "R$ 3.885.347,67",
+        "extensao": "1,4"
       },
       "geometry": {
         "type": "LineString",
@@ -93,7 +94,8 @@
         "km_inicial": 1.9,
         "km_final": 3.0,
         "ano_obra": "10",
-        "valor_obra": "R$ 2.291.242,71"
+        "valor_obra": "R$ 2.291.242,71",
+        "extensao": "1,1"
       },
       "geometry": {
         "type": "LineString",
@@ -161,7 +163,8 @@
         "km_inicial": 5.7,
         "km_final": 6.1,
         "ano_obra": "10",
-        "valor_obra": "R$ 1.103.373,34"
+        "valor_obra": "R$ 1.103.373,34",
+        "extensao": "0,4"
       },
       "geometry": {
         "type": "LineString",
@@ -201,7 +204,8 @@
         "km_inicial": 9.5,
         "km_final": 12.0,
         "ano_obra": "10",
-        "valor_obra": "R$ 4.691.633,94"
+        "valor_obra": "R$ 4.691.633,94",
+        "extensao": "2,5"
       },
       "geometry": {
         "type": "LineString",
@@ -325,7 +329,8 @@
         "km_inicial": 12.0,
         "km_final": 13.7,
         "ano_obra": "10",
-        "valor_obra": "R$ 3.046.808,47"
+        "valor_obra": "R$ 3.046.808,47",
+        "extensao": "1,7"
       },
       "geometry": {
         "type": "LineString",
@@ -417,7 +422,8 @@
         "km_inicial": 14.2,
         "km_final": 16.9,
         "ano_obra": "10",
-        "valor_obra": "R$ 4.802.460,90"
+        "valor_obra": "R$ 4.802.460,90",
+        "extensao": "2,7"
       },
       "geometry": {
         "type": "LineString",
@@ -549,7 +555,8 @@
         "km_inicial": 19.2,
         "km_final": 19.5,
         "ano_obra": "10",
-        "valor_obra": "R$ 959.094,66"
+        "valor_obra": "R$ 959.094,66",
+        "extensao": "0,3"
       },
       "geometry": {
         "type": "LineString",
@@ -585,7 +592,8 @@
         "km_inicial": 62.5,
         "km_final": 62.7,
         "ano_obra": "9",
-        "valor_obra": "R$ 771.333,98"
+        "valor_obra": "R$ 771.333,98",
+        "extensao": "0,2"
       },
       "geometry": {
         "type": "LineString",
@@ -621,7 +629,8 @@
         "km_inicial": 63.3,
         "km_final": 65.1,
         "ano_obra": "9",
-        "valor_obra": "R$ 3.426.714,89"
+        "valor_obra": "R$ 3.426.714,89",
+        "extensao": "1,8"
       },
       "geometry": {
         "type": "LineString",
@@ -713,7 +722,8 @@
         "km_inicial": 78.2,
         "km_final": 78.4,
         "ano_obra": "9",
-        "valor_obra": "R$ 566.153,28"
+        "valor_obra": "R$ 566.153,28",
+        "extensao": "0,2"
       },
       "geometry": {
         "type": "LineString",
@@ -741,7 +751,8 @@
         "km_inicial": 91.3,
         "km_final": 91.5,
         "ano_obra": "9",
-        "valor_obra": "R$ 514.167,86"
+        "valor_obra": "R$ 514.167,86",
+        "extensao": "0,2"
       },
       "geometry": {
         "type": "LineString",
@@ -773,7 +784,8 @@
         "km_inicial": 97.0,
         "km_final": 97.2,
         "ano_obra": "9",
-        "valor_obra": "R$ 525.363,72"
+        "valor_obra": "R$ 525.363,72",
+        "extensao": "0,2"
       },
       "geometry": {
         "type": "LineString",
@@ -801,7 +813,8 @@
         "km_inicial": 145.7,
         "km_final": 145.8,
         "ano_obra": "8",
-        "valor_obra": "R$ 278.602,73"
+        "valor_obra": "R$ 278.602,73",
+        "extensao": "0,1"
       },
       "geometry": {
         "type": "LineString",
@@ -829,7 +842,8 @@
         "km_inicial": 181.9,
         "km_final": 183.2,
         "ano_obra": "8",
-        "valor_obra": "R$ 1.884.773,80"
+        "valor_obra": "R$ 1.884.773,80",
+        "extensao": "1,3"
       },
       "geometry": {
         "type": "LineString",
@@ -905,7 +919,8 @@
         "km_inicial": 184.1,
         "km_final": 185.0,
         "ano_obra": "8",
-        "valor_obra": "R$ 1.427.067,37"
+        "valor_obra": "R$ 1.427.067,37",
+        "extensao": "0,9"
       },
       "geometry": {
         "type": "LineString",
@@ -965,7 +980,8 @@
         "km_inicial": 186.5,
         "km_final": 186.9,
         "ano_obra": "7",
-        "valor_obra": "R$ 903.657,38"
+        "valor_obra": "R$ 903.657,38",
+        "extensao": "0,4"
       },
       "geometry": {
         "type": "LineString",
@@ -1005,7 +1021,8 @@
         "km_inicial": 194.7,
         "km_final": 195.5,
         "ano_obra": "7",
-        "valor_obra": "R$ 1.476.335,81"
+        "valor_obra": "R$ 1.476.335,81",
+        "extensao": "0,8"
       },
       "geometry": {
         "type": "LineString",
@@ -1061,7 +1078,8 @@
         "km_inicial": 196.4,
         "km_final": 197.7,
         "ano_obra": "7",
-        "valor_obra": "R$ 2.425.209,29"
+        "valor_obra": "R$ 2.425.209,29",
+        "extensao": "1,3"
       },
       "geometry": {
         "type": "LineString",
@@ -1137,7 +1155,8 @@
         "km_inicial": 199.6,
         "km_final": 200.2,
         "ano_obra": "7",
-        "valor_obra": "R$ 1.905.265,92"
+        "valor_obra": "R$ 1.905.265,92",
+        "extensao": "0,6"
       },
       "geometry": {
         "type": "LineString",
@@ -1185,7 +1204,8 @@
         "km_inicial": 212.8,
         "km_final": 213.2,
         "ano_obra": "7",
-        "valor_obra": "R$ 1.929.126,78"
+        "valor_obra": "R$ 1.929.126,78",
+        "extensao": "0,4"
       },
       "geometry": {
         "type": "LineString",
@@ -1225,7 +1245,8 @@
         "km_inicial": 213.7,
         "km_final": 215.3,
         "ano_obra": "7",
-        "valor_obra": "R$ 3.687.021,12"
+        "valor_obra": "R$ 3.687.021,12",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -1309,7 +1330,8 @@
         "km_inicial": 215.8,
         "km_final": 216.4,
         "ano_obra": "7",
-        "valor_obra": "R$ 1.419.259,05"
+        "valor_obra": "R$ 1.419.259,05",
+        "extensao": "0,6"
       },
       "geometry": {
         "type": "LineString",
@@ -1357,7 +1379,8 @@
         "km_inicial": 217.2,
         "km_final": 218.3,
         "ano_obra": "7",
-        "valor_obra": "R$ 2.169.184,24"
+        "valor_obra": "R$ 2.169.184,24",
+        "extensao": "1,1"
       },
       "geometry": {
         "type": "LineString",
@@ -1421,7 +1444,8 @@
         "km_inicial": 225.2,
         "km_final": 225.4,
         "ano_obra": "7",
-        "valor_obra": "R$ 817.386,32"
+        "valor_obra": "R$ 817.386,32",
+        "extensao": "0,2"
       },
       "geometry": {
         "type": "LineString",
@@ -1453,7 +1477,8 @@
         "km_inicial": 224.9,
         "km_final": 225.1,
         "ano_obra": "7",
-        "valor_obra": "R$ 769.668,87"
+        "valor_obra": "R$ 769.668,87",
+        "extensao": "0,2"
       },
       "geometry": {
         "type": "LineString",
@@ -1485,7 +1510,8 @@
         "km_inicial": 226.2,
         "km_final": 227.6,
         "ano_obra": "7",
-        "valor_obra": "R$ 2.464.524,54"
+        "valor_obra": "R$ 2.464.524,54",
+        "extensao": "1,4"
       },
       "geometry": {
         "type": "LineString",
@@ -1565,7 +1591,8 @@
         "km_inicial": 229.6,
         "km_final": 232.5,
         "ano_obra": "7",
-        "valor_obra": "R$ 4.824.147,12"
+        "valor_obra": "R$ 4.824.147,12",
+        "extensao": "2,9"
       },
       "geometry": {
         "type": "LineString",
@@ -1705,7 +1732,8 @@
         "km_inicial": 235.1,
         "km_final": 236.0,
         "ano_obra": "7",
-        "valor_obra": "R$ 1.873.835,26"
+        "valor_obra": "R$ 1.873.835,26",
+        "extensao": "0,9"
       },
       "geometry": {
         "type": "LineString",
@@ -1765,7 +1793,8 @@
         "km_inicial": 262.2,
         "km_final": 262.4,
         "ano_obra": "6",
-        "valor_obra": "R$ 803.712,14"
+        "valor_obra": "R$ 803.712,14",
+        "extensao": "0,2"
       },
       "geometry": {
         "type": "LineString",
@@ -1797,7 +1826,8 @@
         "km_inicial": 264.7,
         "km_final": 265.0,
         "ano_obra": "6",
-        "valor_obra": "R$ 924.725,43"
+        "valor_obra": "R$ 924.725,43",
+        "extensao": "0,3"
       },
       "geometry": {
         "type": "LineString",
@@ -1833,7 +1863,8 @@
         "km_inicial": 266.3,
         "km_final": 266.6,
         "ano_obra": "6",
-        "valor_obra": "R$ 899.255,39"
+        "valor_obra": "R$ 899.255,39",
+        "extensao": "0,3"
       },
       "geometry": {
         "type": "LineString",
@@ -1869,7 +1900,8 @@
         "km_inicial": 264.1,
         "km_final": 264.3,
         "ano_obra": "6",
-        "valor_obra": "R$ 741.709,95"
+        "valor_obra": "R$ 741.709,95",
+        "extensao": "0,2"
       },
       "geometry": {
         "type": "LineString",
@@ -1901,7 +1933,8 @@
         "km_inicial": 264.7,
         "km_final": 266.1,
         "ano_obra": "6",
-        "valor_obra": "R$ 2.458.167,50"
+        "valor_obra": "R$ 2.458.167,50",
+        "extensao": "1,4"
       },
       "geometry": {
         "type": "LineString",
@@ -1981,7 +2014,8 @@
         "km_inicial": 270.2,
         "km_final": 274.0,
         "ano_obra": "6",
-        "valor_obra": "R$ 6.023.884,88"
+        "valor_obra": "R$ 6.023.884,88",
+        "extensao": "3,8"
       },
       "geometry": {
         "type": "LineString",
@@ -2157,7 +2191,8 @@
         "km_inicial": 299.6,
         "km_final": 301.5,
         "ano_obra": "6",
-        "valor_obra": "R$ 3.276.600,60"
+        "valor_obra": "R$ 3.276.600,60",
+        "extensao": "1,9"
       },
       "geometry": {
         "type": "LineString",
@@ -2257,7 +2292,8 @@
         "km_inicial": 295.8,
         "km_final": 297.1,
         "ano_obra": "6",
-        "valor_obra": "R$ 2.338.724,65"
+        "valor_obra": "R$ 2.338.724,65",
+        "extensao": "1,3"
       },
       "geometry": {
         "type": "LineString",
@@ -2333,7 +2369,8 @@
         "km_inicial": 297.6,
         "km_final": 298.6,
         "ano_obra": "6",
-        "valor_obra": "R$ 1.997.230,65"
+        "valor_obra": "R$ 1.997.230,65",
+        "extensao": "1,0"
       },
       "geometry": {
         "type": "LineString",
@@ -2397,7 +2434,8 @@
         "km_inicial": 303.1,
         "km_final": 306.4,
         "ano_obra": "6",
-        "valor_obra": "R$ 5.396.960,13"
+        "valor_obra": "R$ 5.396.960,13",
+        "extensao": "3,3"
       },
       "geometry": {
         "type": "LineString",
@@ -2553,7 +2591,8 @@
         "km_inicial": 349.5,
         "km_final": 351.9,
         "ano_obra": "4",
-        "valor_obra": "R$ 4.408.942,97"
+        "valor_obra": "R$ 4.408.942,97",
+        "extensao": "2,4"
       },
       "geometry": {
         "type": "LineString",
@@ -2673,7 +2712,8 @@
         "km_inicial": 352.1,
         "km_final": 352.5,
         "ano_obra": "4",
-        "valor_obra": "R$ 1.089.735,10"
+        "valor_obra": "R$ 1.089.735,10",
+        "extensao": "0,4"
       },
       "geometry": {
         "type": "LineString",
@@ -2713,7 +2753,8 @@
         "km_inicial": 352.8,
         "km_final": 353.3,
         "ano_obra": "4",
-        "valor_obra": "R$ 1.251.719,30"
+        "valor_obra": "R$ 1.251.719,30",
+        "extensao": "0,5"
       },
       "geometry": {
         "type": "LineString",
@@ -2757,7 +2798,8 @@
         "km_inicial": 353.6,
         "km_final": 354.1,
         "ano_obra": "4",
-        "valor_obra": "R$ 1.105.305,63"
+        "valor_obra": "R$ 1.105.305,63",
+        "extensao": "0,5"
       },
       "geometry": {
         "type": "LineString",
@@ -2801,7 +2843,8 @@
         "km_inicial": 356.9,
         "km_final": 357.3,
         "ano_obra": "4",
-        "valor_obra": "R$ 1.180.766,11"
+        "valor_obra": "R$ 1.180.766,11",
+        "extensao": "0,4"
       },
       "geometry": {
         "type": "LineString",
@@ -2841,7 +2884,8 @@
         "km_inicial": 351.8,
         "km_final": 352.8,
         "ano_obra": "4",
-        "valor_obra": "R$ 2.090.562,07"
+        "valor_obra": "R$ 2.090.562,07",
+        "extensao": "1,0"
       },
       "geometry": {
         "type": "LineString",
@@ -2905,7 +2949,8 @@
         "km_inicial": 352.5,
         "km_final": 352.9,
         "ano_obra": "4",
-        "valor_obra": "R$ 1.180.550,37"
+        "valor_obra": "R$ 1.180.550,37",
+        "extensao": "0,4"
       },
       "geometry": {
         "type": "LineString",
@@ -2945,7 +2990,8 @@
         "km_inicial": 353.2,
         "km_final": 353.6,
         "ano_obra": "4",
-        "valor_obra": "R$ 1.179.883,10"
+        "valor_obra": "R$ 1.179.883,10",
+        "extensao": "0,4"
       },
       "geometry": {
         "type": "LineString",
@@ -2985,7 +3031,8 @@
         "km_inicial": 354.0,
         "km_final": 355.4,
         "ano_obra": "4",
-        "valor_obra": "R$ 2.502.119,10"
+        "valor_obra": "R$ 2.502.119,10",
+        "extensao": "1,4"
       },
       "geometry": {
         "type": "LineString",
@@ -3065,7 +3112,8 @@
         "km_inicial": 358.5,
         "km_final": 359.2,
         "ano_obra": "4",
-        "valor_obra": "R$ 1.638.970,24"
+        "valor_obra": "R$ 1.638.970,24",
+        "extensao": "0,7"
       },
       "geometry": {
         "type": "LineString",
@@ -3117,7 +3165,8 @@
         "km_inicial": 200.6,
         "km_final": 203.4,
         "ano_obra": "9",
-        "valor_obra": "R$ 39.258.106,34"
+        "valor_obra": "R$ 39.258.106,34",
+        "extensao": "2,8"
       },
       "geometry": {
         "type": "LineString",
@@ -3253,7 +3302,8 @@
         "km_inicial": 204.0,
         "km_final": 205.9,
         "ano_obra": "9",
-        "valor_obra": "R$ 10.629.363,05"
+        "valor_obra": "R$ 10.629.363,05",
+        "extensao": "1,9"
       },
       "geometry": {
         "type": "LineString",
@@ -3353,7 +3403,8 @@
         "km_inicial": 206.6,
         "km_final": 210.3,
         "ano_obra": "9",
-        "valor_obra": "R$ 33.889.554,87"
+        "valor_obra": "R$ 33.889.554,87",
+        "extensao": "3,7"
       },
       "geometry": {
         "type": "LineString",
@@ -3521,7 +3572,8 @@
         "km_inicial": 212.7,
         "km_final": 214.3,
         "ano_obra": "9",
-        "valor_obra": "R$ 0,00"
+        "valor_obra": "R$ 0,00",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -3609,7 +3661,8 @@
         "km_inicial": 217.8,
         "km_final": 220.5,
         "ano_obra": "8",
-        "valor_obra": "R$ 28.142.071,72"
+        "valor_obra": "R$ 28.142.071,72",
+        "extensao": "2,7"
       },
       "geometry": {
         "type": "LineString",
@@ -3741,7 +3794,8 @@
         "km_inicial": 220.1,
         "km_final": 221.8,
         "ano_obra": "8",
-        "valor_obra": "R$ 7.331.902,06"
+        "valor_obra": "R$ 7.331.902,06",
+        "extensao": "1,7"
       },
       "geometry": {
         "type": "LineString",
@@ -3829,7 +3883,8 @@
         "km_inicial": 222.0,
         "km_final": 224.3,
         "ano_obra": "7",
-        "valor_obra": "R$ 0,00"
+        "valor_obra": "R$ 0,00",
+        "extensao": "2,3"
       },
       "geometry": {
         "type": "LineString",
@@ -3941,7 +3996,8 @@
         "km_inicial": 223.9,
         "km_final": 228.6,
         "ano_obra": "6",
-        "valor_obra": "R$ 70.421.225,74"
+        "valor_obra": "R$ 70.421.225,74",
+        "extensao": "4,7"
       },
       "geometry": {
         "type": "LineString",
@@ -4153,7 +4209,8 @@
         "km_inicial": 229.9,
         "km_final": 233.1,
         "ano_obra": "6",
-        "valor_obra": "R$ 0,00"
+        "valor_obra": "R$ 0,00",
+        "extensao": "3,2"
       },
       "geometry": {
         "type": "LineString",
@@ -4305,7 +4362,8 @@
         "km_inicial": 234.0,
         "km_final": 235.4,
         "ano_obra": "6",
-        "valor_obra": "R$ 0,00"
+        "valor_obra": "R$ 0,00",
+        "extensao": "1,4"
       },
       "geometry": {
         "type": "LineString",
@@ -4385,7 +4443,8 @@
         "km_inicial": 243.2,
         "km_final": 244.6,
         "ano_obra": "5",
-        "valor_obra": "R$ 355.992.263,60"
+        "valor_obra": "R$ 355.992.263,60",
+        "extensao": "1,4"
       },
       "geometry": {
         "type": "LineString",
@@ -4465,7 +4524,8 @@
         "km_inicial": 247.2,
         "km_final": 248.9,
         "ano_obra": "5",
-        "valor_obra": "R$ 108.141.480,04"
+        "valor_obra": "R$ 108.141.480,04",
+        "extensao": "1,7"
       },
       "geometry": {
         "type": "LineString",
@@ -4557,7 +4617,8 @@
         "km_inicial": 248.6,
         "km_final": 250.2,
         "ano_obra": "3",
-        "valor_obra": "R$ 474.582.725,27"
+        "valor_obra": "R$ 474.582.725,27",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -4645,7 +4706,8 @@
         "km_inicial": 252.3,
         "km_final": 253.3,
         "ano_obra": "6",
-        "valor_obra": "R$ 6.366.449,15"
+        "valor_obra": "R$ 6.366.449,15",
+        "extensao": "1,0"
       },
       "geometry": {
         "type": "LineString",
@@ -4709,7 +4771,8 @@
         "km_inicial": 254.4,
         "km_final": 256.5,
         "ano_obra": "6",
-        "valor_obra": "R$ 10.892.787,00"
+        "valor_obra": "R$ 10.892.787,00",
+        "extensao": "2,1"
       },
       "geometry": {
         "type": "LineString",
@@ -4817,7 +4880,8 @@
         "km_inicial": 257.5,
         "km_final": 258.4,
         "ano_obra": "6",
-        "valor_obra": "R$ 6.025.752,01"
+        "valor_obra": "R$ 6.025.752,01",
+        "extensao": "0,9"
       },
       "geometry": {
         "type": "LineString",
@@ -4877,7 +4941,8 @@
         "km_inicial": 258.7,
         "km_final": 259.8,
         "ano_obra": "6",
-        "valor_obra": "R$ 243.551.476,80"
+        "valor_obra": "R$ 243.551.476,80",
+        "extensao": "1,1"
       },
       "geometry": {
         "type": "LineString",
@@ -4949,7 +5014,8 @@
         "km_inicial": 270.7,
         "km_final": 272.3,
         "ano_obra": "8",
-        "valor_obra": "R$ 32.012.143,50"
+        "valor_obra": "R$ 32.012.143,50",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -5037,7 +5103,8 @@
         "km_inicial": 271.2,
         "km_final": 276.3,
         "ano_obra": "8",
-        "valor_obra": "R$ 18.586.183,99"
+        "valor_obra": "R$ 18.586.183,99",
+        "extensao": "5,1"
       },
       "geometry": {
         "type": "LineString",
@@ -5265,7 +5332,8 @@
         "km_inicial": 279.1,
         "km_final": 283.4,
         "ano_obra": "8",
-        "valor_obra": "R$ 11.745.082,42"
+        "valor_obra": "R$ 11.745.082,42",
+        "extensao": "4,3"
       },
       "geometry": {
         "type": "LineString",
@@ -5465,7 +5533,8 @@
         "km_inicial": 285.4,
         "km_final": 293.6,
         "ano_obra": "5",
-        "valor_obra": "R$ 34.520.022,74"
+        "valor_obra": "R$ 34.520.022,74",
+        "extensao": "8,2"
       },
       "geometry": {
         "type": "LineString",
@@ -5821,7 +5890,8 @@
         "km_inicial": 295.0,
         "km_final": 297.1,
         "ano_obra": "5",
-        "valor_obra": "R$ 97.938.320,63"
+        "valor_obra": "R$ 97.938.320,63",
+        "extensao": "2,1"
       },
       "geometry": {
         "type": "LineString",
@@ -5929,7 +5999,8 @@
         "km_inicial": 297.2,
         "km_final": 299.1,
         "ano_obra": "4",
-        "valor_obra": "R$ 21.916.102,16"
+        "valor_obra": "R$ 21.916.102,16",
+        "extensao": "1,9"
       },
       "geometry": {
         "type": "LineString",
@@ -6029,7 +6100,8 @@
         "km_inicial": 299.1,
         "km_final": 300.2,
         "ano_obra": "4",
-        "valor_obra": "R$ 4.285.879,08"
+        "valor_obra": "R$ 4.285.879,08",
+        "extensao": "1,1"
       },
       "geometry": {
         "type": "LineString",
@@ -6101,7 +6173,8 @@
         "km_inicial": 301.3,
         "km_final": 302.5,
         "ano_obra": "3",
-        "valor_obra": "R$ 14.973.722,98"
+        "valor_obra": "R$ 14.973.722,98",
+        "extensao": "1,2"
       },
       "geometry": {
         "type": "LineString",
@@ -6173,7 +6246,8 @@
         "km_inicial": 303.7,
         "km_final": 304.7,
         "ano_obra": "3",
-        "valor_obra": "R$ 76.679.354,15"
+        "valor_obra": "R$ 76.679.354,15",
+        "extensao": "1,0"
       },
       "geometry": {
         "type": "LineString",
@@ -6237,7 +6311,8 @@
         "km_inicial": 318.1,
         "km_final": 321.1,
         "ano_obra": "3",
-        "valor_obra": "R$ 64.223.145,73"
+        "valor_obra": "R$ 64.223.145,73",
+        "extensao": "3,0"
       },
       "geometry": {
         "type": "LineString",
@@ -6381,7 +6456,8 @@
         "km_inicial": 322.0,
         "km_final": 326.2,
         "ano_obra": "10",
-        "valor_obra": "R$ 7.961.366,64"
+        "valor_obra": "R$ 7.961.366,64",
+        "extensao": "4,2"
       },
       "geometry": {
         "type": "LineString",
@@ -6577,7 +6653,8 @@
         "km_inicial": 329.2,
         "km_final": 330.5,
         "ano_obra": "10",
-        "valor_obra": "R$ 5.869.712,04"
+        "valor_obra": "R$ 5.869.712,04",
+        "extensao": "1,3"
       },
       "geometry": {
         "type": "LineString",
@@ -6653,7 +6730,8 @@
         "km_inicial": 333.0,
         "km_final": 340.1,
         "ano_obra": "10",
-        "valor_obra": "R$ 10.650.137,72"
+        "valor_obra": "R$ 10.650.137,72",
+        "extensao": "7,1"
       },
       "geometry": {
         "type": "LineString",
@@ -6961,7 +7039,8 @@
         "km_inicial": 339.2,
         "km_final": 345.2,
         "ano_obra": "10",
-        "valor_obra": "R$ 4.775.527,53"
+        "valor_obra": "R$ 4.775.527,53",
+        "extensao": "6,0"
       },
       "geometry": {
         "type": "LineString",
@@ -7229,7 +7308,8 @@
         "km_inicial": 345.2,
         "km_final": 347.6,
         "ano_obra": "10",
-        "valor_obra": "R$ 7.891.033,87"
+        "valor_obra": "R$ 7.891.033,87",
+        "extensao": "2,4"
       },
       "geometry": {
         "type": "LineString",
@@ -7353,7 +7433,8 @@
         "km_inicial": 348.9,
         "km_final": 352.7,
         "ano_obra": "10",
-        "valor_obra": "R$ 4.965.580,23"
+        "valor_obra": "R$ 4.965.580,23",
+        "extensao": "3,8"
       },
       "geometry": {
         "type": "LineString",
@@ -7529,7 +7610,8 @@
         "km_inicial": 352.1,
         "km_final": 353.7,
         "ano_obra": "10",
-        "valor_obra": "R$ 6.386.367,71"
+        "valor_obra": "R$ 6.386.367,71",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -7617,7 +7699,8 @@
         "km_inicial": 353.7,
         "km_final": 355.1,
         "ano_obra": "10",
-        "valor_obra": "R$ 13.138.176,57"
+        "valor_obra": "R$ 13.138.176,57",
+        "extensao": "1,4"
       },
       "geometry": {
         "type": "LineString",
@@ -7697,7 +7780,8 @@
         "km_inicial": 358.7,
         "km_final": 361.3,
         "ano_obra": "10",
-        "valor_obra": "R$ 9.710.224,33"
+        "valor_obra": "R$ 9.710.224,33",
+        "extensao": "2,6"
       },
       "geometry": {
         "type": "LineString",
@@ -7825,7 +7909,8 @@
         "km_inicial": 377.0,
         "km_final": 378.6,
         "ano_obra": "10",
-        "valor_obra": "R$ 4.855.016,88"
+        "valor_obra": "R$ 4.855.016,88",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -7917,7 +8002,8 @@
         "km_inicial": 382.4,
         "km_final": 384.0,
         "ano_obra": "9",
-        "valor_obra": "R$ 3.910.186,07"
+        "valor_obra": "R$ 3.910.186,07",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -8009,7 +8095,8 @@
         "km_inicial": 388.9,
         "km_final": 390.5,
         "ano_obra": "9",
-        "valor_obra": "R$ 4.714.817,67"
+        "valor_obra": "R$ 4.714.817,67",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -8097,7 +8184,8 @@
         "km_inicial": 390.4,
         "km_final": 392.0,
         "ano_obra": "9",
-        "valor_obra": "R$ 4.345.333,78"
+        "valor_obra": "R$ 4.345.333,78",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -8189,7 +8277,8 @@
         "km_inicial": 396.0,
         "km_final": 398.8,
         "ano_obra": "9",
-        "valor_obra": "R$ 2.774.881,76"
+        "valor_obra": "R$ 2.774.881,76",
+        "extensao": "2,8"
       },
       "geometry": {
         "type": "LineString",
@@ -8329,7 +8418,8 @@
         "km_inicial": 399.9,
         "km_final": 401.5,
         "ano_obra": "9",
-        "valor_obra": "R$ 5.780.163,50"
+        "valor_obra": "R$ 5.780.163,50",
+        "extensao": "1,6"
       },
       "geometry": {
         "type": "LineString",
@@ -8417,7 +8507,8 @@
         "km_inicial": 404.4,
         "km_final": 406.2,
         "ano_obra": "9",
-        "valor_obra": "R$ 2.610.152,66"
+        "valor_obra": "R$ 2.610.152,66",
+        "extensao": "1,8"
       },
       "geometry": {
         "type": "LineString",
@@ -8517,7 +8608,8 @@
         "km_inicial": 410.1,
         "km_final": 412.0,
         "ano_obra": "9",
-        "valor_obra": "R$ 3.033.476,44"
+        "valor_obra": "R$ 3.033.476,44",
+        "extensao": "1,9"
       },
       "geometry": {
         "type": "LineString",
@@ -8621,7 +8713,8 @@
         "km_inicial": 412.1,
         "km_final": 413.6,
         "ano_obra": "9",
-        "valor_obra": "R$ 4.822.322,03"
+        "valor_obra": "R$ 4.822.322,03",
+        "extensao": "1,5"
       },
       "geometry": {
         "type": "LineString",
@@ -8709,7 +8802,8 @@
         "km_inicial": 422.5,
         "km_final": 424.7,
         "ano_obra": "9",
-        "valor_obra": "R$ 24.176.367,95"
+        "valor_obra": "R$ 24.176.367,95",
+        "extensao": "2,2"
       },
       "geometry": {
         "type": "LineString",
@@ -8821,7 +8915,8 @@
         "km_inicial": 427.2,
         "km_final": 429.4,
         "ano_obra": "9",
-        "valor_obra": "R$ 21.809.801,26"
+        "valor_obra": "R$ 21.809.801,26",
+        "extensao": "2,2"
       },
       "geometry": {
         "type": "LineString",
@@ -8937,7 +9032,8 @@
         "km_inicial": 429.1,
         "km_final": 430.8,
         "ano_obra": "8",
-        "valor_obra": "R$ 33.349.175,49"
+        "valor_obra": "R$ 33.349.175,49",
+        "extensao": "1,7"
       },
       "geometry": {
         "type": "LineString",
@@ -9033,7 +9129,8 @@
         "km_inicial": 430.7,
         "km_final": 437.3,
         "ano_obra": "8",
-        "valor_obra": "R$ 8.835.351,08"
+        "valor_obra": "R$ 8.835.351,08",
+        "extensao": "6,6"
       },
       "geometry": {
         "type": "LineString",
@@ -9321,7 +9418,8 @@
         "km_inicial": 436.9,
         "km_final": 437.3,
         "ano_obra": "8",
-        "valor_obra": "R$ 8.857.423,23"
+        "valor_obra": "R$ 8.857.423,23",
+        "extensao": "0,4"
       },
       "geometry": {
         "type": "LineString",
@@ -9361,7 +9459,8 @@
         "km_inicial": 437.2,
         "km_final": 442.7,
         "ano_obra": "8",
-        "valor_obra": "R$ 6.031.381,60"
+        "valor_obra": "R$ 6.031.381,60",
+        "extensao": "5,5"
       },
       "geometry": {
         "type": "LineString",
@@ -9605,7 +9704,8 @@
         "km_inicial": 445.7,
         "km_final": 450.8,
         "ano_obra": "8",
-        "valor_obra": "R$ 5.432.836,72"
+        "valor_obra": "R$ 5.432.836,72",
+        "extensao": "5,1"
       },
       "geometry": {
         "type": "LineString",
@@ -9837,7 +9937,8 @@
         "km_inicial": 489.6,
         "km_final": 492.7,
         "ano_obra": "8",
-        "valor_obra": "R$ 3.522.071,20"
+        "valor_obra": "R$ 3.522.071,20",
+        "extensao": "3,1"
       },
       "geometry": {
         "type": "LineString",

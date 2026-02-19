@@ -35,7 +35,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            width: 350px;
+            width: 380px;
             height: 100vh;
             background: #f8f9fa;
             z-index: 1005;
@@ -46,7 +46,7 @@
         }
 
         .sidebar.collapsed {
-            transform: translateX(-350px);
+            transform: translateX(-380px);
         }
 
         .toggle-sidebar {
@@ -68,9 +68,49 @@
         }
 
         .header {
-            padding: 20px;
+            padding: 9px 14.5px 9px 9.5px;
+            /* Deslocado 2.5px para a esquerda para ajuste fino de centralização visual */
             background: #2c3e50;
             color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Centraliza logo + texto */
+            gap: 10px;
+        }
+
+        .header img {
+            width: 135px;
+            height: auto;
+            filter: invert(1) brightness(2);
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            /* Alinha o início do status com o início do título */
+            gap: 1px;
+        }
+
+        .header-title {
+            font-size: 1.17em;
+            font-weight: bold;
+            color: white;
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            /* Centraliza pin + texto */
+            gap: 4px;
+            font-size: 0.9em;
+            /* Ajustado para um tamanho mais equilibrado */
+            opacity: 0.95;
+            margin-top: -1px;
         }
 
         .filters {
@@ -288,8 +328,14 @@
     <div class="sidebar" id="sidebar">
         <div class="toggle-sidebar" onclick="toggleMenu()" id="toggleIcon">◀</div>
         <div class="header">
-            <h3 style="margin:0; font-size: 1.3em;">📍 Rota Gerais</h3>
-            <div id="status" style="font-size: 0.9em; opacity: 0.8;">Carregando...</div>
+            <img src="investimentos.svg" alt="Investimentos">
+            <div class="header-content">
+                <div class="header-title">Obras - Rota Gerais</div>
+                <div class="header-status">
+                    <span>📍</span>
+                    <span id="status">Carregando...</span>
+                </div>
+            </div>
         </div>
         <div class="filters">
             <select id="filtroMunicipio" onchange="aplicarFiltros()">
@@ -392,7 +438,7 @@
             geojsonLayer = L.geoJSON({ type: "FeatureCollection", features: features }, {
                 style: {
                     color: "#00FF00",
-                    weight: isMobile ? 14 : 4, // Linha fina no PC, grossa no Mobile
+                    weight: isMobile ? 14 : 2.5, // Linha fina no PC, grossa no Mobile
                     opacity: 0.9
                 },
                 onEachFeature: (f, l) => {
@@ -407,7 +453,7 @@
                             
                             <div class="popup-data-row"><b>Descrição:</b> ${p.descricao}</div>
                             <div class="popup-data-row"><b>Rodovia:</b> ${p.rodovia} &nbsp; | &nbsp; <b>Ano:</b> ${p.ano_obra}</div>
-                            <div class="popup-data-row"><b>Trecho:</b> KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}</div>
+                            <div class="popup-data-row"><b>Trecho:</b> KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)} &nbsp; | &nbsp; <b>Extensão:</b> ${p.extensao} KM</div>
                             
                             <span class="popup-price">${p.valor_obra}</span>
                         </div>
@@ -435,7 +481,7 @@
                 card.innerHTML = `
                     <strong>${p.tipo_obra}</strong>
                     <div class="subtitle">📍 ${p.municipio} | ${p.rodovia}</div>
-                    <div class="trecho-info">Trecho: KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}</div>
+                    <div class="trecho-info">Trecho: KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)} | Extensão: ${p.extensao} KM</div>
                     
                     <div class="footer">
                         <span class="obra-tag">${p.obra}</span>

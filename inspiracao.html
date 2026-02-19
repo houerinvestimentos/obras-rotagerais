@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <title>Benchmarking Concessões</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-group="DADOS DA CONCESSÃO">
+
+    <header class="main-header">
+        <div class="header-top">
+            <div class="logo-container">
+                <img src="investimentos.png" alt="Investimentos Logo" class="logo">
+            </div>
+            <div class="title-container">
+                <h1>BENCHMARKING DAS CONCESSÕES</h1>
+                <p
+                    style="text-transform: uppercase; font-size: 10px; color: var(--text-secondary); font-weight: 700; letter-spacing: 0.1em; margin-top: 4px;">
+                    Indicadores de Concessões • Rodoviárias</p>
+            </div>
+        </div>
+
+        <div class="header-bottom">
+            <nav class="main-nav">
+                <a href="calendario.html" class="nav-btn">Calendário</a>
+                <a href="index.html" class="nav-btn active">Concessões</a>
+                <a href="financeiro.html" class="nav-btn">Resultados Financeiros</a>
+                <a href="capex_total.html" class="nav-btn">CAPEX Total</a>
+                <a href="capex_segmentado.html" class="nav-btn">CAPEX Segmentado</a>
+                <a href="opex.html" class="nav-btn">OPEX Total</a>
+                <a href="opex_segmentado.html" class="nav-btn">OPEX Segmentado</a>
+            </nav>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-grid">
+                <!-- Concessão de Referência -->
+                <div class="filter-item reference-filter">
+                    <h3 class="filter-title">Concessões de Referência</h3>
+                    <div class="multi-select-wrapper">
+                        <div class="multi-select-display" id="ref-display">
+                            <span class="selected-text" id="ref-selected-text">Selecionar...</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="multi-select-dropdown" id="ref-dropdown">
+                            <!-- Options will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="selected-tags-container" id="ref-tags">
+                        <!-- Tags will be added here dynamically -->
+                    </div>
+                </div>
+
+                <!-- Concessões de Comparação -->
+                <div class="filter-item comparison-filter">
+                    <h3 class="filter-title">Concessões de Comparação</h3>
+                    <div class="multi-select-wrapper">
+                        <div class="multi-select-display" id="concessoes-display">
+                            <span class="selected-text">TODOS</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="multi-select-dropdown" id="concessoes-dropdown">
+                            <div class="option-item">
+                                <input type="checkbox" id="opt-todos" value="TODOS" checked>
+                                <label for="opt-todos">TODOS</label>
+                            </div>
+                            <!-- Options will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <!-- Selected tags display -->
+                    <div class="selected-tags-container" id="selected-tags">
+                        <!-- Tags will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="content-area">
+        <div id="table-container" class="table-wrapper">
+            <!-- Table will be rendered here -->
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>`n    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
