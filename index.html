@@ -79,7 +79,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        // 1. Limites Geográficos de Minas Gerais para travar o mapa
+        // 1. Limites Geográficos de Minas Gerais
         const boundsMG = [
             [-23.0, -51.5], // Sudoeste
             [-14.0, -39.5]  // Nordeste
@@ -90,14 +90,13 @@
             maxBoundsViscosity: 1.0 
         }).setView([-18.5, -44.5], 7);
 
-        // 2. Camada de Satélite com zoom inteligente (evita tela cinza)
+        // 2. Satélite com zoom inteligente (maxNativeZoom evita tela cinza)
         const satLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri',
-            maxNativeZoom: 18, // Satélite real para aqui
-            maxZoom: 22        // Leaflet estica a imagem até aqui
+            maxNativeZoom: 18, 
+            maxZoom: 22        
         }).addTo(map);
 
-        // Camada híbrida para nomes de cidades e ruas
         L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.png', {
             opacity: 0.6,
             maxZoom: 22
@@ -167,7 +166,7 @@
                 onEachFeature: (f, l) => {
                     const p = f.properties;
                     
-                    // CORREÇÃO: Limita casas decimais no Popup
+                    // CORREÇÃO: Força 3 casas decimais no Popup
                     const kmIni = Number(p.km_inicial).toFixed(3);
                     const kmFim = Number(p.km_final).toFixed(3);
 
