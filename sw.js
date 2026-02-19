@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rota-gerais-v3'; // Versão incrementada para novos recursos
+const CACHE_NAME = 'rota-gerais-v4'; // Versão v4: Foco em Offline
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -9,7 +9,7 @@ const STATIC_ASSETS = [
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
 ];
 
-const MAP_TILE_CACHE = 'map-tiles-cache-v1';
+const MAP_TILE_CACHE = 'map-tiles-persist-v1';
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -30,15 +30,22 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // Estratégia para Tiles do Mapa (Satélite Esri)
+  // ESTRATÉGIA: Cache-First Agressiva para Tiles (Satélite Esri)
   if (url.hostname.includes('arcgisonline.com')) {
     event.respondWith(
       caches.open(MAP_TILE_CACHE).then(cache => {
         return cache.match(event.request).then(response => {
-          if (response) return response; // Retorna do cache se existir
+          // Se está no cache, retorna imediatamente (Zero Latency)
+          if (response) return response;
+
+          // Se não está, busca na rede e salva para sempre
           return fetch(event.request).then(networkResponse => {
-            cache.put(event.request, networkResponse.clone()); // Salva no cache para a próxima vez
+            if (networkResponse.status === 200) {
+              cache.put(event.request, networkResponse.clone());
+            }
             return networkResponse;
+          }).catch(() => {
+            // Silenciosamente falha se estiver totalmente offline e sem cache
           });
         });
       })
@@ -46,12 +53,11 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Estratégia Cache-First para Ativos Estáticos
+  // ESTRATÉGIA: Cache-First para Ativos Locais
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
       if (cachedResponse) return cachedResponse;
       return fetch(event.request).then(networkResponse => {
-        // Opcional: Cachear dinamicamente outros arquivos do próprio domínio
         if (url.origin === location.origin) {
           return caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, networkResponse.clone());
