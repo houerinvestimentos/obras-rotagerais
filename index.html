@@ -283,6 +283,28 @@
             display: block;
         }
 
+        /* Indicador Offline */
+        .offline-indicator {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1020;
+            background: rgba(39, 174, 96, 0.95);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            /* Ativado via JS */
+            align-items: center;
+            gap: 5px;
+            pointer-events: none;
+            backdrop-filter: blur(4px);
+        }
+
         /* Botão GPS */
         .gps-button {
             position: absolute;
@@ -340,17 +362,63 @@
                 transform: translateX(-320px);
             }
 
+            .header {
+                gap: 5px;
+                /* Reduz espaço entre logo e texto no mobile */
+                padding: 10px;
+            }
+
+            .header img {
+                width: 100px;
+                /* Logo menor no mobile */
+            }
+
+            .header-title {
+                font-size: 1.05em;
+                /* Diminui levemente para caber em uma linha */
+                white-space: nowrap;
+                /* Impede quebra de linha */
+            }
+
+            .header-status {
+                font-size: 0.8em;
+            }
+
             .obra-card {
-                padding: 18px;
-                /* Maior no mobile como solicitado */
+                padding: 15px;
             }
 
             .obra-card strong {
-                font-size: 1.2em;
+                font-size: 1.1em;
+            }
+
+            /* Forçar Trecho e Extensão em linhas separadas no mobile se necessário */
+            .trecho-info {
+                display: block;
+                line-height: 1.4;
+            }
+
+            .footer {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+                align-items: flex-end !important;
             }
 
             .valor-container {
-                font-size: 1.15em;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+            }
+
+            .valor-label {
+                font-size: 0.7em;
+                margin-bottom: -2px;
+            }
+
+            .valor-container span:not(.valor-label) {
+                font-size: 1.1em;
+                line-height: 1;
             }
         }
 
@@ -376,6 +444,7 @@
 <body>
 
     <div class="sidebar" id="sidebar">
+        <div id="offlineIndicator" class="offline-indicator">⚡ Modo Offline Ativo</div>
         <div class="toggle-sidebar" onclick="toggleMenu()" id="toggleIcon">◀</div>
         <div class="header">
             <img src="investimentos.svg" alt="Investimentos">
@@ -549,6 +618,12 @@
             dadosCompletos = data.features;
             popularDropdowns(dadosCompletos);
             aplicarFiltros();
+
+            // Verifica se está servindo via cache (Modo Offline)
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                document.getElementById('offlineIndicator').style.display = 'flex';
+            }
+
             document.getElementById('status').innerText = `${dadosCompletos.length} obras`;
         });
 
@@ -640,13 +715,14 @@
                     <strong>${p.tipo_obra}</strong>
                     <div class="subtitle">📍 ${munDisplay} | ${p.rodovia}</div>
                     <div class="trecho-info" style="margin-bottom:4px; color:#555;"><b>Descrição:</b> ${p.descricao}</div>
-                    <div class="trecho-info"><b>Trecho:</b> KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)} | <b>Extensão:</b> ${p.extensao} KM</div>
+                    <div class="trecho-info"><b>Trecho:</b> KM ${Number(p.km_inicial).toFixed(3)} ao ${Number(p.km_final).toFixed(3)}</div>
+                    <div class="trecho-info"><b>Extensão:</b> ${p.extensao} KM</div>
                     
                     <div class="footer">
                         <span class="obra-tag">${p.obra}</span>
                         <div class="valor-container">
-                            <span class="valor-label" style="font-weight:bold; color:#555; font-size: 0.8em;">Valor EVETEA:</span>
-                            <span>${valorSemCentavos}</span>
+                            <span class="valor-label" style="font-weight:bold;">VALOR EVETEA:</span>
+                            <span style="color:#27ae60; font-weight:bold;">${valorSemCentavos}</span>
                         </div>
                     </div>
                 `;
